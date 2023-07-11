@@ -1,18 +1,20 @@
 import 'package:e_commerceapp/shared/components/custom_button.dart';
 import 'package:e_commerceapp/shared/components/custom_text_form_feild.dart';
 import 'package:e_commerceapp/shared/components/form_label.dart';
-import 'package:e_commerceapp/ui/register_ui/register_ui.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  static String routename = "SignIn";
+class RegisterScreen extends StatefulWidget {
+  static const String routename = "Register";
   @override
-  State<SignIn> createState() => _State();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _State extends State<SignIn> {
-  TextEditingController emailController = TextEditingController();
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController? passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController? repasswordController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -22,28 +24,46 @@ class _State extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(
-              height: 60,
+              height: 75,
             ),
             Image.asset("assets/image/Route_Login_Logo.png"),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Text(
-                "Welcome Back to Route ",
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-            ),
+            FormLabel(label: "Full name"),
             const SizedBox(
-              height: 6,
+              height: 24,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Text(
-                "Please sign in with mail",
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
+            CustomTextFormFeild(
+                hintText: "please enter your Full name",
+                controller: nameController,
+                validator: (Text) {
+                  if (Text == null || Text.isEmpty) {
+                    return 'please enter your full name';
+                  }
+                  return null; // return null means no error
+                },
+                type: TextInputType.name),
+            const SizedBox(
+              height: 24,
+            ),
+            FormLabel(label: "Mobil number"),
+            const SizedBox(
+              height: 24,
+            ),
+            CustomTextFormFeild(
+              hintText: "Please enter your Mobile Number",
+              controller: phoneController,
+              validator: (Text) {
+                if (Text == null || Text.isEmpty) {
+                  return 'please enter your number';
+                }
+                if (Text.length < 10) {
+                  return " invalid phone number ";
+                }
+                return null;
+              },
+              type: TextInputType.phone,
             ),
             const SizedBox(
               height: 24,
@@ -72,6 +92,9 @@ class _State extends State<SignIn> {
               height: 24,
             ),
             FormLabel(label: "Password"),
+            const SizedBox(
+              height: 24,
+            ),
             CustomTextFormFeild(
               hintText: "Please enter your Password",
               controller: passwordController,
@@ -88,40 +111,9 @@ class _State extends State<SignIn> {
               isPassword: true,
             ),
             const SizedBox(
-              height: 16,
+              height: 45,
             ),
-            InkWell(
-              onTap: () {},
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 9),
-                    child: FormLabel(label: "Forget Password"),
-                  )),
-            ),
-            const SizedBox(
-              height: 28,
-            ),
-            CustomButton('Login', () {}),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FormLabel(
-                  label: 'Dont have an Account?',
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, RegisterScreen.routename);
-                  },
-                  child: FormLabel(
-                    label: 'Create Account',
-                  ),
-                ),
-              ],
-            )
+            CustomButton('Sign Up', () {}),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:e_commerceapp/shared/utils/my_theme.dart';
+import 'package:e_commerceapp/ui/register_ui/register_ui.dart';
 import 'package:e_commerceapp/ui/sign_in_ui/sign_in.dart';
 import 'package:e_commerceapp/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      theme: MyTheme.lighttheme,
-      routes: {
-         SplashScreen.routename:(_)=>SplashScreen(),
-        SignIn.routename:(_)=>SignIn(),
-    },
-      initialRoute:SplashScreen.routename ,
-
-    );
+        theme: MyTheme.lighttheme,
+        routes: {
+          SplashScreen.routename: (_) => SplashScreen(),
+          SignIn.routename: (_) => SignIn(),
+          RegisterScreen.routename: (_) => RegisterScreen(),
+        },
+        initialRoute: SplashScreen.routename);
   }
 }
-
